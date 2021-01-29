@@ -6,16 +6,18 @@ export default function Orders(props) {
   return (
     <>
       <h1>Orders on the Way:</h1>
-      {
-        orders.map(order => (
-          <div key='temp' className='order' style={{ border: '1px solid crimson' }}>
-            <h1>{order.name}</h1>
-            <h3>Size: {order.size}</h3>
-            <h3>Toppings: {order.topping1}, {order.topping2}, {order.topping3}, {order.topping4}, </h3>
-            <h3>Special Instructions: {order.instructions}</h3>
-          </div>
-        ))
-      }
+      <div style={{ border: '1px solid yellow' }}>
+        {
+          orders.map(order => (
+            <div key='temp' className='order' style={{ border: '1px solid crimson' }}>
+              <h3>{order.name}</h3>
+              <h5>Size: {order.size}</h5>
+              <h5>Toppings: {order.topping1}, {order.topping2}, {order.topping3}, {order.topping4}, </h5>
+              <h6>Special Instructions: {order.instructions}</h6>
+            </div>
+          ))
+        }
+      </div>
     </>
   )
 }

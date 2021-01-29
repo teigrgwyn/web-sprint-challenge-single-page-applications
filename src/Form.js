@@ -1,7 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import * as yup from 'yup'; // import absolutely everything yup has to offer
 import axios from 'axios';
+import Styled from 'styled-components';
 import { Link } from 'react-router-dom';
+
+const FormWrapper = Styled.form`
+  display: flex;
+  flex-direction: column;
+`;
 
 const schema = yup.object().shape({
   name: yup
@@ -56,6 +62,67 @@ export default function Form(props) {
   }, [form]) // run effect when formData is changed - make submit button valid only if formData follows formSchema structure
 
   return (
-    <h1>Submit a Pizza Order:</h1>
+    <div>
+      <h1>Submit a Pizza Order:</h1>
+      <FormWrapper className='form-component' onSubmit={submit}>
+        <input
+          name='name'
+          value={form.name}
+          onChange={onFormChange}
+          placeholder='Name for Order?'
+          style={{ width: '200px' }}
+        />
+        <br></br>
+        <label>
+          Size:
+          <select name='size'>
+            <option>Medium</option>
+            <option>Small</option>
+            <option>Large</option>
+            <option>X-Large</option>
+            value={form.size}
+            onChange={onFormChange}
+          </select>
+        </label>
+        <br></br>
+        <label>
+          Cheese?
+          <input type='checkbox'
+            name='topping1'
+            checked={form.topping1}
+            onChange={onFormChange}
+          />
+        </label>
+        <label>
+          Pepperoni?
+          <input type='checkbox'
+            name='topping2'
+            checked={form.topping2}
+            onChange={onFormChange}
+          />
+        </label>
+        <label>
+          Olive?
+          <input type='checkbox'
+            name='topping3'
+            checked={form.topping3}
+            onChange={onFormChange}
+          />
+        </label>
+        <label>
+          Mushroom?
+          <input type='checkbox'
+            name='topping4'
+            checked={form.topping4}
+            onChange={onFormChange}
+          />
+        </label>
+        <br></br>
+        <input type='submit'
+          disabled={disabled}
+          style={{ width: '100px' }}
+        />
+      </FormWrapper>
+    </div>
   )
 }
