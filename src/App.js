@@ -3,7 +3,6 @@ import Form from "./Form"
 import Orders from "./Orders"
 import { BrowserRouter, Route, Link } from 'react-router-dom';
 
-
 const App = () => {
   const [orders] = useState([]); // in the future, only the file declaring the state should be able to change it...
 
