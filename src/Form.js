@@ -136,7 +136,7 @@ export default function Form(props) {
           name='instructions'
           value={form.instructions}
           onChange={onFormChange}
-          style={{ width: '600px', height: '200px' }}
+          style={{ width: '600px', height: '50px' }}
         />
         <input type='submit'
           disabled={disabled}

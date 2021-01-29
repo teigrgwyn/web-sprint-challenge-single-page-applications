@@ -3,8 +3,6 @@ import React from 'react';
 export default function Orders(props) {
   const { orders } = props;
 
-  
-
   return (
     <>
       <h1>Orders on the Way:</h1>
