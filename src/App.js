@@ -5,7 +5,7 @@ import { BrowserRouter, Route, Link } from 'react-router-dom';
 
 
 const App = () => {
-  const [orders] = useState([]);
+  const [orders] = useState([]); // in the future, only the file declaring the state should be able to change it...
 
   return (
     <>
@@ -21,7 +21,7 @@ const App = () => {
           <Link to='/'>
             <h3>Return to Home</h3>
           </Link>
-          <Form />
+          <Form orders={orders} />
         </Route>
       </BrowserRouter>
     </>

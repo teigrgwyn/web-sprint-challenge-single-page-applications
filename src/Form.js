@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import * as yup from 'yup'; // import absolutely everything yup has to offer
 import axios from 'axios';
 import Styled from 'styled-components';
-import { Link } from 'react-router-dom';
 
 const FormWrapper = Styled.form`
   display: flex;
@@ -13,12 +12,26 @@ const schema = yup.object().shape({
   name: yup
     .string()
     .min(2, "Your name entry must be at least 2 characters long."),
+  topping1: yup
+    .boolean()
+    .oneOf([true], "We don't allow panzies to eat here. You must get cheese."),
+  topping2: yup
+    .boolean()
+    .oneOf([true, false], "test"),
+  topping3: yup
+    .boolean()
+    .oneOf([true, false], "test"),
+  topping4: yup
+    .boolean()
+    .oneOf([true, false], "test"),
+  instructions: yup
+    .string()
 });
 
 const initialForm = {
   name: '', //text
   size: '', //dropdown
-  topping1: false, //checkboxes
+  topping1: true, //checkboxes
   topping2: false,
   topping3: false,
   topping4: false,
@@ -29,7 +42,7 @@ export default function Form(props) {
   const { orders } = props;
 
   const [form, setForm] = useState(initialForm)
-  const [errors, setErrors] = useState({ name: '' })
+  const [errors, setErrors] = useState({ name: '', topping1: '', topping2: '', topping3: '', topping4: '', instructions: '' })
   const [disabled, setDisabled] = useState(true);
 
   const setFormErrors = (name, value) => {
@@ -53,13 +66,13 @@ export default function Form(props) {
         setForm(initialForm);
       })
       .catch(err => {
-        console.log('Axios POST Catch');
+        console.log('Axios POST Catch "console.log" Executed');
       })
   }
 
   useEffect(() => {
     schema.isValid(form).then(valid => setDisabled(!valid));
-  }, [form]) // run effect when formData is changed - make submit button valid only if formData follows formSchema structure
+  }, [form]) // run effect when form is changed - make submit button valid only if form follows schema structure
 
   return (
     <div>
@@ -118,10 +131,22 @@ export default function Form(props) {
           />
         </label>
         <br></br>
+        Special Instructions?
+        <input
+          name='instructions'
+          value={form.instructions}
+          onChange={onFormChange}
+          style={{ width: '600px', height: '200px' }}
+        />
         <input type='submit'
           disabled={disabled}
           style={{ width: '100px' }}
         />
+        <br></br>
+        {/* error-div below spits out warning, not sure why... but doesn't detract from functionality! */}
+        <div className='error-div' style={{ color: 'red' }}>
+          <div>{errors.name}</div>
+        </div>
       </FormWrapper>
     </div>
   )
